@@ -1,5 +1,6 @@
 import math
 
+
 def _check_numbers(*values):
     """Raise ValueError if any value is not an int/float (bools rejected)."""
     for v in values:
