@@ -17,10 +17,8 @@ def fun1(x, y):
     Raises:
         ValueError: If x or y is not a number.
     """
-    if not (isinstance(x, (int, float)) and isinstance(y, (int, float))):
-        raise ValueError("Both inputs must be numbers.")
+    _check_numbers(x, y)
     return x + y
-
 
 def fun2(x, y):
     """
@@ -33,10 +31,8 @@ def fun2(x, y):
     Raises:
         ValueError: If x or y is not a number.
     """
-    if not (isinstance(x, (int, float)) and isinstance(y, (int, float))):
-        raise ValueError("Both inputs must be numbers.")
+    _check_numbers(x, y)
     return x - y
-
 
 def fun3(x, y):
     """
@@ -49,10 +45,8 @@ def fun3(x, y):
     Raises:
         ValueError: If either x or y is not a number.
     """
-    if not (isinstance(x, (int, float)) and isinstance(y, (int, float))):
-        raise ValueError("Both inputs must be numbers.")
+    _check_numbers(x, y)
     return x * y
-
 
 def fun4(x, y, z):
     """
@@ -81,18 +75,19 @@ def divide(x, y):
         raise ZeroDivisionError("Cannot divide by zero.")
     return x / y
 
-
 def power(x, y):
     """
     Raises x to the power y.
     Raises:
         ValueError: If inputs are not numbers, or x is negative and y is not a whole number.
+        ZeroDivisionError: If x is zero and y is negative.
     """
     _check_numbers(x, y)
+    if x == 0 and y < 0:
+        raise ZeroDivisionError("Zero cannot be raised to a negative power.")
     if x < 0 and y != int(y):
         raise ValueError("Negative base needs a whole-number exponent.")
     return x ** y
-
 
 def average(*numbers):
     """
@@ -105,7 +100,6 @@ def average(*numbers):
     _check_numbers(*numbers)
     return sum(numbers) / len(numbers)
 
-
 def modulo(x, y):
     """
     Returns the remainder of x divided by y.
@@ -117,7 +111,6 @@ def modulo(x, y):
     if y == 0:
         raise ZeroDivisionError("Cannot take modulo by zero.")
     return x % y
-
 
 def sqrt(x):
     """

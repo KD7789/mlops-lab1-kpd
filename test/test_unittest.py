@@ -7,7 +7,6 @@ sys.path.append(project_root)
 
 from src import calculator
 
-
 class TestCalculator(unittest.TestCase):
 
     def test_fun1(self):
@@ -33,7 +32,6 @@ class TestCalculator(unittest.TestCase):
         self.assertEqual(calculator.fun4(5, 0, -1), 4)
         self.assertEqual(calculator.fun4(-1, -1, -1), -3)
         self.assertEqual(calculator.fun4(-1, -1, 100), 98)
-
     
     def test_fun4_invalid_input(self):
         with self.assertRaises(ValueError):
@@ -96,7 +94,15 @@ class TestCalculator(unittest.TestCase):
     def test_sqrt_invalid_input(self):
         with self.assertRaises(ValueError):
             calculator.sqrt("16")    
+    
+    def test_basic_functions_reject_booleans(self):
+        for func in (calculator.fun1, calculator.fun2, calculator.fun3):
+            with self.assertRaises(ValueError):
+                func(True, 1)
 
+    def test_power_zero_to_negative_power(self):
+        with self.assertRaises(ZeroDivisionError):
+            calculator.power(0, -1)
 
 if __name__ == '__main__':
     unittest.main()

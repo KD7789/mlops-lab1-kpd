@@ -1,37 +1,37 @@
-   name: Python Unittests
+name: Python Unittests
 
-   on:
-     push:
-       branches: [main]
-     pull_request:
-     workflow_dispatch:
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
 
-   jobs:
-     build:
-       runs-on: ubuntu-latest
-       strategy:
-         matrix:
-           python-version: ["3.10", "3.11", "3.12"]
-       steps:
-         - name: Checkout code
-           uses: actions/checkout@v4
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.10", "3.11", "3.12"]
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-         - name: Set up Python ${{ matrix.python-version }}
-           uses: actions/setup-python@v5
-           with:
-             python-version: ${{ matrix.python-version }}
-             cache: pip
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: pip
 
-         - name: Install dependencies
-           run: pip install -r requirements.txt
+      - name: Install dependencies
+        run: pip install -r requirements.txt
 
-         - name: Run unittests
-           run: python -m unittest test.test_unittest
+      - name: Run unittests
+        run: python -m unittest test.test_unittest
 
-         - name: Notify on success
-           if: success()
-           run: echo "Unit tests passed successfully"
+      - name: Notify on success
+        if: success()
+        run: echo "Unit tests passed successfully"
 
-         - name: Notify on failure
-           if: failure()
-           run: echo "Unit tests failed"
+      - name: Notify on failure
+        if: failure()
+        run: echo "Unit tests failed"
