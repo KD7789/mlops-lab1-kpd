@@ -11,9 +11,9 @@ Based on the course lab: https://github.com/raminmohammadi/MLOps/tree/main/Labs/
 
 ```
 src/calculator.py          calculator functions
-data/
 test/test_pytest.py        pytest tests
 test/test_unittest.py      unittest tests
+data/
 .github/workflows/
   pytest_action.yml        runs pytest
   unittest_action.yml      runs unittest
@@ -27,6 +27,7 @@ requirements.txt
 pip install -r requirements.txt
 python -m pytest
 python -m unittest test.test_unittest
+python -m pytest --cov=src --cov-fail-under=90
 ```
 
 ## What I changed from the original lab
@@ -48,6 +49,7 @@ python -m unittest test.test_unittest
 - Added a Python 3.10 / 3.11 / 3.12 test matrix and pip caching
 - Fixed the starter workflows (a `run-nam` typo, conflicting branch filters, unneeded issue/label triggers) and updated outdated versions (`checkout@v4`, `setup-python@v5`, `upload-artifact@v4`, Python 3.10-3.12). They now run on push, pull request, and manual dispatch.
 - Each matrix run saves its own pytest XML report, so results can be downloaded per Python version
+- Added a coverage check: the build fails if test coverage of `src/` falls below 90%, and the coverage report is saved with each run
 
 ## CI status
 
