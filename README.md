@@ -17,7 +17,6 @@ data/
 .github/workflows/
   pytest_action.yml        lint + pytest with coverage
   unittest_action.yml      runs unittest
-screenshots/               CI screenshot
 requirements.txt
 ruff.toml                  lint rules
 ```
@@ -54,7 +53,3 @@ ruff check src test
 - Each matrix run saves its own pytest XML report, so results can be downloaded per Python version
 - Added a coverage check: the build fails if test coverage of `src/` falls below 90%, and the coverage report is saved with each run
 - Added a ruff lint job that runs before the tests, with a `ruff.toml` so lint rules are the same locally and in CI
-
-## CI status
-
-![Actions runs](screenshots/actions-green.png)
